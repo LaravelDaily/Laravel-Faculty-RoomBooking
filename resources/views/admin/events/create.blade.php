@@ -78,6 +78,15 @@
                 <span class="help-block">{{ trans('cruds.event.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="recurring_until">Recurring until</label>
+                <input class="form-control date {{ $errors->has('recurring_until') ? 'is-invalid' : '' }}" type="text" name="recurring_until" id="recurring_until" value="{{ old('recurring_until') }}">
+                @if($errors->has('recurring_until'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('recurring_until') }}
+                    </div>
+                @endif
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

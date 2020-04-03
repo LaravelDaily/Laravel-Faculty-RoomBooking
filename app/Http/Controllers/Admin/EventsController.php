@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyEventRequest;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Room;
+use App\Services\EventService;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -35,9 +36,19 @@ class EventsController extends Controller
         return view('admin.events.create', compact('rooms', 'users'));
     }
 
-    public function store(StoreEventRequest $request)
+    public function store(StoreEventRequest $request, EventService $eventService)
     {
+        if ($eventService->isRoomTaken($request->all())) {
+            return redirect()->back()
+                    ->withInput($request->input())
+                    ->withErrors('This room is not available at the time you have chosen');
+        }
+
         $event = Event::create($request->all());
+
+        if ($request->filled('recurring_until')) {
+            $eventService->createRecurringEvents($request->all());
+        }
 
         return redirect()->route('admin.events.index');
 
