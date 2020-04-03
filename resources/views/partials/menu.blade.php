@@ -81,6 +81,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route("admin.searchRoom") }}" class="nav-link {{ request()->is('admin/search-room') ? 'active' : '' }}">
+                    <i class="nav-icon fa-fw fas fa-calendar">
+
+                    </i>
+                    Search room
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
 
