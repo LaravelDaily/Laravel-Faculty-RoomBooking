@@ -1,5 +1,6 @@
 $(document).ready(function () {
   window._token = $('meta[name="csrf-token"]').attr('content')
+  window._stripe_key = $('meta[name="stripe-key"]').attr('content')
 
   moment.updateLocale('en', {
     week: {dow: 1} // Monday is the first day of the week

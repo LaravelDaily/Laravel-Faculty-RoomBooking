@@ -52,6 +52,16 @@
                     </ul>
                 </li>
             @endcan
+            @if(!auth()->user()->is_admin)
+                <li class="nav-item">
+                    <a href="{{ route("admin.balance.index") }}" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-dollar">
+
+                        </i>
+                        My Credits
+                    </a>
+                </li>
+            @endif
             @can('room_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.rooms.index") }}" class="nav-link {{ request()->is('admin/rooms') || request()->is('admin/rooms/*') ? 'active' : '' }}">

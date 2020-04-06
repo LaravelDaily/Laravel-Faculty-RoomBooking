@@ -38,4 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('search-room', 'BookingsController@searchRoom')->name('searchRoom');
     Route::post('book-room', 'BookingsController@bookRoom')->name('bookRoom');
+
+    Route::get('my-credits', 'BalanceController@index')->name('balance.index');
+    Route::post('add-balance', 'BalanceController@add')->name('balance.add');
 });
