@@ -21,12 +21,18 @@ class UpdateRoomRequest extends FormRequest
     {
         return [
             'name'     => [
-                'required'],
+                'required'
+            ],
             'capacity' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
-                'max:2147483647'],
+                'max:2147483647'
+            ],
+            'hourly_rate' => [
+                'nullable',
+                'numeric',
+            ]
         ];
 
     }

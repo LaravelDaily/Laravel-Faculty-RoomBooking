@@ -77,6 +77,8 @@ return [
             'capacity_helper'    => '',
             'description'        => 'Description',
             'description_helper' => '',
+            'hourly_rate'        => 'Hourly rate',
+            'hourly_rate_helper' => '',
             'created_at'         => 'Created at',
             'created_at_helper'  => '',
             'updated_at'         => 'Updated at',

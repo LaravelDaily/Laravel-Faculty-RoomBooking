@@ -47,6 +47,14 @@
                             {{ $room->description }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.room.fields.hourly_rate') }}
+                        </th>
+                        <td>
+                            {{ $room->hourly_rate }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

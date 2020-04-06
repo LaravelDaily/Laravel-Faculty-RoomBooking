@@ -35,7 +35,7 @@ class BalanceController extends Controller
             $user->credits += $stripeCharge->amount;
             $user->save();
         } catch (\Exception $ex) {
-            return redirect()->back()->withErrors([$ex->getMessage() . $paymentMethod]);
+            return redirect()->back()->withErrors([$ex->getMessage()]);
         }
 
         return redirect()->back()->withMessage('Transaction completed');

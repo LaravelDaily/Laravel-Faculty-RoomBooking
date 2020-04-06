@@ -35,6 +35,9 @@
                             {{ trans('cruds.room.fields.description') }}
                         </th>
                         <th>
+                            {{ trans('cruds.room.fields.hourly_rate') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -56,6 +59,9 @@
                             </td>
                             <td>
                                 {{ $room->description ?? '' }}
+                            </td>
+                            <td>
+                                {{ $room->hourly_rate ?? '' }}
                             </td>
                             <td>
                                 @can('room_show')

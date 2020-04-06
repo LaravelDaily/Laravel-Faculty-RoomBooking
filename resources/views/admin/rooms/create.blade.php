@@ -40,6 +40,16 @@
                 <span class="help-block">{{ trans('cruds.room.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="hourly_rate">{{ trans('cruds.room.fields.hourly_rate') }}</label>
+                <input class="form-control {{ $errors->has('hourly_rate') ? 'is-invalid' : '' }}" type="number" name="hourly_rate" id="hourly_rate" value="{{ old('hourly_rate', '') }}" step="0.01">
+                @if($errors->has('hourly_rate'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('hourly_rate') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.room.fields.hourly_rate_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
