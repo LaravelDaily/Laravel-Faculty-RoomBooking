@@ -43,14 +43,24 @@ class BookingsController extends Controller
         ]);
 
         $request->validate([
-            'title' => 'required'
+            'title'   => 'required',
+            'room_id' => 'required',
         ]);
+
+        $room = Room::findOrFail($request->input('room_id'));
 
         if ($eventService->isRoomTaken($request->all())) {
             return redirect()->back()
                     ->withInput()
                     ->withErrors(['recurring_until' => 'This room is not available until the recurring date you have chosen']);
         }
+
+        if (!auth()->user()->is_admin && !$eventService->chargeHourlyRate($request->all(), $room)) {
+            return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['Please add more credits to your account. <a href="' . route('admin.balance.index') . '">My Credits</a>']);
+        }
+
         $event = Event::create($request->all());
 
         if ($request->filled('recurring_until')) {

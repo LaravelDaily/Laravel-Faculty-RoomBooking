@@ -40,6 +40,7 @@ class User extends Authenticatable
         'deleted_at',
         'remember_token',
         'email_verified_at',
+        'credits',
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -89,6 +90,24 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function chargeCredits($amount, $room)
+    {
+        if ($this->credits < $amount) {
+            return false;
+        }
+
+        $this->credits -= $amount;
+        $this->save();
+
+        Transaction::create([
+            'user_id'     => $this->id,
+            'room_id'     => $room,
+            'paid_amount' => $amount,
+        ]);
+
+        return true;
     }
 
 }

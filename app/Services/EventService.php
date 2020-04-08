@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Event;
+use App\Room;
 use Carbon\Carbon;
 
 class EventService
@@ -49,5 +50,27 @@ class EventService
         } while ($end_time->lte($recurringUntil));
 
         return false;
+    }
+
+    public function chargeHourlyRate($requestData, Room $room)
+    {
+        if (!$room->hourly_rate) {
+            return true;
+        }
+
+        $recurringUntil = Carbon::parse($requestData['recurring_until'])->setTime(23, 59, 59);
+        $start_time     = Carbon::parse($requestData['start_time']);
+        $end_time       = Carbon::parse($requestData['end_time']);
+        $hours          = (int) ceil($end_time->diffInMinutes($start_time) / 60);
+        $total          = 0;
+
+        do {
+            $total +=  $hours * (int) $room->hourly_rate * 100;
+
+            $start_time->addWeek();
+            $end_time->addWeek();
+        } while ($end_time->lte($recurringUntil));
+
+        return auth()->user()->chargeCredits($total, $room->id);
     }
 }

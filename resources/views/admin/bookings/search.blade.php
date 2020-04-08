@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<div style="margin-bottom: 10px;" class="row">
-    
-</div>
 <div class="card">
     <div class="card-header">
         Search Room
@@ -47,6 +44,9 @@
                                     {{ trans('cruds.room.fields.capacity') }}
                                 </th>
                                 <th>
+                                    {{ trans('cruds.room.fields.hourly_rate') }}
+                                </th>
+                                <th>
                                     &nbsp;
                                 </th>
                             </tr>
@@ -59,6 +59,9 @@
                                     </td>
                                     <td>
                                         {{ $room->capacity ?? '' }}
+                                    </td>
+                                    <td>
+                                        {{ $room->hourly_rate ? '$' . number_format($room->hourly_rate, 2) : 'FREE' }}
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#bookRoom" data-room-id="{{ $room->id }}">
