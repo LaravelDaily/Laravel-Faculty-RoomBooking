@@ -37,7 +37,7 @@
 
                             </td>
                             <td>
-                                {{ $transaction->id ?? '' }}
+                                {{ $transaction->created_at ?? '' }}
                             </td>
                             <td>
                                 {{ $transaction->room ? $transaction->room->name : '' }}
