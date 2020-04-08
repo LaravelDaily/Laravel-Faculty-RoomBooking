@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('room_id')->nullable();
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->integer('paid_amount');
+            $table->integer('booking_time')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

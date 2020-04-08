@@ -62,15 +62,15 @@ class EventService
         $start_time     = Carbon::parse($requestData['start_time']);
         $end_time       = Carbon::parse($requestData['end_time']);
         $hours          = (int) ceil($end_time->diffInMinutes($start_time) / 60);
-        $total          = 0;
+        $totalHours     = 0;
 
         do {
-            $total +=  $hours * (int) $room->hourly_rate * 100;
+            $totalHours += $hours;
 
             $start_time->addWeek();
             $end_time->addWeek();
         } while ($end_time->lte($recurringUntil));
 
-        return auth()->user()->chargeCredits($total, $room->id);
+        return auth()->user()->chargeCredits($totalHours, $room);
     }
 }

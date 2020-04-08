@@ -35,7 +35,48 @@
                 </div>
             </div>
         </form>
-        
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Transactions
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Room
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($user->transactions as $transaction)
+                        <tr>
+                            <td class="room-name">
+                                {{ $transaction->room ? $transaction->room->name : '' }}
+                            </td>
+                            <td>
+                                ${{ number_format($transaction->paid_amount / 100, 2) ?? '0.00' }}
+                            </td>
+                            <td>
+                                {{ $transaction->created_at }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

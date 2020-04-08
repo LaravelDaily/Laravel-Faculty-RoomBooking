@@ -13,6 +13,7 @@ class Transaction extends Model
         'user_id',
         'room_id',
         'paid_amount',
+        'booking_time',
         'created_at',
         'updated_at',
         'deleted_at',

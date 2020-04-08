@@ -92,8 +92,10 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
-    public function chargeCredits($amount, $room)
+    public function chargeCredits($hours, Room $room)
     {
+        $amount = $hours * (int) $room->hourly_rate * 100;
+
         if ($this->credits < $amount) {
             return false;
         }
@@ -102,9 +104,10 @@ class User extends Authenticatable
         $this->save();
 
         Transaction::create([
-            'user_id'     => $this->id,
-            'room_id'     => $room,
-            'paid_amount' => $amount,
+            'user_id'      => $this->id,
+            'room_id'      => $room->id,
+            'paid_amount'  => $amount,
+            'booking_time' => $hours,
         ]);
 
         return true;

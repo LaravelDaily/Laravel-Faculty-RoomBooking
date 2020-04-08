@@ -11,7 +11,7 @@ class BalanceController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $user->load('transactions');
+        $user->load('transactions.room');
         $intent = $user->createSetupIntent();
 
         return view('admin.balance', compact('user', 'intent'));

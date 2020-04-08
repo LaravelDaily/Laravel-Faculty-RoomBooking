@@ -128,7 +128,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="submitBooking">Save changes</button>
+                <button type="button" class="btn btn-primary" id="submitBooking">Submit</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
